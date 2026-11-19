@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>냐미 Nyummy</title>
+<link rel="alternate" hreflang="ko" href="https://www.nyummy.co.kr/ko/">
+<link rel="alternate" hreflang="ja" href="https://www.nyummy.co.kr/jp/">
+<link rel="alternate" hreflang="x-default" href="https://www.nyummy.co.kr/ko/">
+<script>
+  (function () {
+    var l = (navigator.languages && navigator.languages[0]) || navigator.language || "ko";
+    location.replace(/^ja/i.test(l) ? "jp/" : "ko/");
+  })();
+</script>
+</head>
+<body>
+<p><a href="ko/">한국어</a> / <a href="jp/">日本語</a></p>
+</body>
+</html>
