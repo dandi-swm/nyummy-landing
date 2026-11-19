@@ -2,19 +2,15 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>냐미 Nyummy</title>
-<link rel="alternate" hreflang="ko" href="https://www.nyummy.co.kr/ko/">
-<link rel="alternate" hreflang="ja" href="https://www.nyummy.co.kr/jp/">
-<link rel="alternate" hreflang="x-default" href="https://www.nyummy.co.kr/ko/">
-<script>
-  (function () {
-    var l = (navigator.languages && navigator.languages[0]) || navigator.language || "ko";
-    location.replace(/^ja/i.test(l) ? "jp/" : "ko/");
-  })();
-</script>
+<link rel="alternate" hreflang="ko" href="ko/">
+<link rel="alternate" hreflang="ja" href="jp/">
+<script>location.replace(/^ja\b/i.test(navigator.language || '') ? 'jp/' : 'ko/');</script>
+<meta http-equiv="refresh" content="0; url=ko/">
+<style>body{margin:0;background:#f7f9fa}</style>
 </head>
 <body>
-<p><a href="ko/">한국어</a> / <a href="jp/">日本語</a></p>
+<noscript><p><a href="ko/">한국어</a> <a href="jp/" lang="ja">日本語</a></p></noscript>
 </body>
 </html>
