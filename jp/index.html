@@ -1,254 +1,128 @@
 <!doctype html>
-<html lang="ja" data-type="software" data-radius="round" data-ground="sage" data-buttons="tonal" data-motion>
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nyummy（ニャミ）: グラムで計らず食習慣を見直すAI食事記録アプリ</title>
-<meta name="description" content="食事の写真を1枚撮るとAIが料理を見つけてカロリーとPFCを記録し、月間カレンダーで振り返りながら、食べ方で体が変わる猫のニャミと食事を残せるアプリです。">
+<title>Nyummy（ニャミ）: 猫のニャミと一緒に続けるAI食事記録</title>
+<meta name="description" content="ごはんの写真を1枚撮るだけでAIがカロリーとPFCを記録。食べ方にあわせて猫のニャミが変わります。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Nyummy（ニャミ）: グラムで計らず食習慣を見直すAI食事記録アプリ">
-<meta property="og:description" content="食事の写真を1枚撮るとAIが料理を見つけてカロリーとPFCを記録し、月間カレンダーで振り返りながら、食べ方で体が変わる猫のニャミと食事を残せるアプリです。">
+<meta property="og:title" content="Nyummy（ニャミ）: 飼い主さん、今日のごはんは？">
+<meta property="og:description" content="ごはんを撮るだけでAIが記録。食べ方にあわせてニャミが変わるよ。">
 <meta property="og:image" content="../share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.png" type="image/png">
 <link rel="alternate" hreflang="ko" href="../ko/">
 <link rel="alternate" hreflang="ja" href="../jp/">
 <link rel="alternate" hreflang="x-default" href="../">
-<meta name="theme-color" content="#f7f9fa">
-<!-- <link rel="canonical" href="https://[the client's domain]/"> : the landing domain is not decided yet -->
-<meta name="site-kind" content="software">
-<meta name="page-type" content="software">
-<!-- Airbridge Web SDK (official loader). TODO: replace e3690b146ca047b89c410e6a1fdf38f9 with the web token from the Airbridge dashboard. -->
+<meta name="theme-color" content="#8f86b8">
+<!-- Airbridge Web SDK -->
 <script>
 (function(a_,i_,r_,_b,_r,_i,_d,_g,_e){if(!a_[_b]){var n=function(){var c=i_.createElement(r_);c.onerror=function(){h.queue.filter(function(a){return 0<=_d.indexOf(a[0])}).forEach(function(a){a=a[1];a=a[a.length-1];"function"===typeof a&&a("error occur when load airbridge")})};c.async=1;c.src=_r;"complete"===i_.readyState?i_.head.appendChild(c):a_.addEventListener("load",function k(){a_.removeEventListener("load",k);i_.head.appendChild(c)})},h={queue:[],get isSDKEnabled(){return!1}};_i.concat(_d).forEach(function(c){var a=c.split("."),k=a.pop();a.reduce(function(p,q){return p[q]=p[q]||{}},h)[k]=function(){h.queue.push([c,arguments])}});a_[_b]=h;0<_g?(_b=new (a_.XDomainRequest||a_.XMLHttpRequest),_i=function(){},_b.open("GET",_r),_b.timeout=_g,_b.onload=function(){n()},_b.onerror=_i,_b.ontimeout=_i,_b.send()):n()}})(window,document,"script","airbridge","//static.airbridge.io/sdk/latest/airbridge.min.js","init startTracking stopTracking openDeeplink setDeeplinks sendWeb setUserAgent setUserAlias addUserAlias setMobileAppData setUserId setUserEmail setUserPhone setUserAttributes clearUser setDeviceAlias removeDeviceAlias clearDeviceAlias setDeviceIFV setDeviceIFA setDeviceGAID events.send events.signIn events.signUp events.signOut events.purchased events.addedToCart events.productDetailsViewEvent events.homeViewEvent events.productListViewEvent events.searchResultViewEvent".split(" "),["events.wait","createTouchpoint"],0);
 try { airbridge.init({ app: 'nyummy', webToken: 'e3690b146ca047b89c410e6a1fdf38f9' }); } catch (e) {}
 </script>
+<link rel="preload" as="image" href="../img/hero-tall.webp" media="(max-aspect-ratio: 4/5)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- dealt pairing: plex (IBM Plex Sans). The Latin cut has no Hangul or Kana, so the page loads the same family's
-     Korean cut (IBM Plex Sans KR) and, for Japanese, its Japanese cut (IBM Plex Sans JP, added by the page script) -->
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&amp;display=swap&amp;text=%20%23%26%2C-./012679%3A%3B%3DACFGINPS_abcdefghijklmnoprstuvwy%E3%80%81%E3%80%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8E%E3%81%8F%E3%81%90%E3%81%91%E3%81%93%E3%81%94%E3%81%95%E3%81%97%E3%81%98%E3%81%99%E3%81%9A%E3%81%9B%E3%81%9D%E3%81%9F%E3%81%A0%E3%81%A1%E3%81%A3%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%A9%E3%81%AA%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B1%E3%81%B3%E3%81%B8%E3%81%B9%E3%81%BB%E3%81%BD%E3%81%BE%E3%81%BF%E3%82%81%E3%82%82%E3%82%83%E3%82%84%E3%82%87%E3%82%88%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8D%E3%82%8F%E3%82%92%E3%82%93%E3%82%A2%E3%82%A3%E3%82%A4%E3%82%A6%E3%82%A7%E3%82%AB%E3%82%AC%E3%82%AD%E3%82%B0%E3%82%B3%E3%82%B4%E3%82%B7%E3%82%B8%E3%82%B9%E3%83%80%E3%83%83%E3%83%88%E3%83%89%E3%83%8B%E3%83%90%E3%83%93%E3%83%97%E3%83%9B%E3%83%9D%E3%83%9E%E3%83%9F%E3%83%A0%E3%83%A1%E3%83%A3%E3%83%A5%E3%83%A7%E3%83%A9%E3%83%AA%E3%83%AB%E3%83%AC%E3%83%AD%E3%83%B3%E3%83%BC%E4%B8%A6%E4%B8%AD%E4%B8%BB%E4%BA%8B%E4%BA%BA%E4%BD%93%E4%BF%A1%E5%85%A5%E5%85%AC%E5%85%B7%E5%86%99%E5%87%BA%E5%88%86%E5%88%A9%E5%89%8D%E5%8C%96%E5%8F%96%E5%8F%97%E5%90%88%E5%9B%BD%E5%9C%A8%E5%A0%B1%E5%A4%89%E5%A4%95%E5%A5%BD%E5%A7%8B%E5%A7%BF%E5%AE%B6%E5%B1%8A%E5%B1%8B%E5%BA%A7%E5%BD%B1%E5%BE%85%E5%BF%9C%E6%85%A3%E6%89%8B%E6%8A%9C%E6%8C%AF%E6%8F%8F%E6%92%AE%E6%96%87%E6%96%99%E6%96%B9%E6%97%A5%E6%98%BC%E6%99%82%E6%99%AF%E6%9B%BF%E6%9C%88%E6%9C%AC%E6%9E%9A%E6%A7%98%E6%A8%A1%E6%AE%8B%E6%B0%97%E6%B0%B4%E6%B5%81%E7%82%AD%E7%84%BC%E7%89%88%E7%89%A9%E7%8C%AB%E7%8F%BE%E7%90%86%E7%94%A8%E7%94%BB%E7%99%BA%E7%9B%B4%E7%9C%9F%E7%9F%AD%E7%A2%BA%E7%A4%BA%E7%A9%8D%E7%AE%B1%E7%B4%84%E7%B7%A8%E7%BD%AE%E7%BF%92%E8%83%8C%E8%84%82%E8%87%AA%E8%A1%97%E8%A1%A8%E8%A6%8B%E8%A6%8F%E8%A8%88%E8%A8%98%E8%AA%8D%E8%AD%98%E8%B2%AF%E8%B2%B7%E8%B3%AA%E8%BF%8E%E8%BF%91%E8%BF%94%E9%81%B8%E9%83%A8%E9%85%8D%E9%85%AC%E9%87%8D%E9%8C%B2%E9%96%8B%E9%96%93%E9%9B%86%E9%9D%A2%E9%9F%93%E9%A3%9F%E9%A3%BC%E9%A3%BE%E9%AB%98%EA%B5%AD%EC%96%B4%ED%95%9C%EF%BC%88%EF%BC%890123456789" rel="stylesheet">
-<link rel="stylesheet" href="../assets/system.css">
-<link rel="stylesheet" href="../assets/ui/cards.css">
-<link rel="stylesheet" href="../assets/motion/motion.css">
-<link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
-<link rel="stylesheet" href="../assets/layout/layout.css">
-<link rel="stylesheet" href="../assets/icons/icon.css">
-<style>
-:root {
-  --p-bg: #f7f9fa; --p-surface: #ecf0f2; --p-ink: #1f3038; --p-muted: #5e6b71;
-  --p-accent: #5f9a6e; --p-accent-ink: #111111; --p-action: #5f9a6e; --p-action-ink: #111111;
-  --p-inv-bg: #1f3038; --p-inv-surface: #2c3c44; --p-inv-ink: #f7f9fa; --p-inv-muted: #9ea7ab;
-  --p-inv-accent: #5f9a6e; --p-inv-accent-ink: #111111; --p-inv-action: #5f9a6e; --p-inv-action-ink: #111111;
-  --font-display: "IBM Plex Sans KR", system-ui, sans-serif;
-  --font-text: "IBM Plex Sans KR", system-ui, sans-serif;
-  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --display-weight: 500;
-  --display-tracking: -0.025em;
-  --display-tracking-xl: -0.035em;
-  --ly-scale: 0.98;
-}
-html[lang="ja"] { --font-display: "IBM Plex Sans JP", system-ui, sans-serif; --font-text: "IBM Plex Sans JP", system-ui, sans-serif; }
-</style>
-<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
-<script src="../assets/backgrounds/backgrounds.js"></script>
-<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
-<link rel="modulepreload" href="../assets/moments/moments.js">
-<link rel="modulepreload" href="../assets/moments/lib.js">
-<link rel="modulepreload" href="../assets/moments/liquid-type/moment.js">
-<link rel="modulepreload" href="../assets/moments/line-carries-colour/moment.js">
-<!-- page CSS: the phone device inside the visuals, the key art in the hero frame, one --p-h per card group -->
-<style>
-  .nav__logo img { width: 28px; height: 28px; border-radius: 8px; }
-  .device { position: relative; width: var(--dw, 280px); aspect-ratio: 9 / 20; border: 8px solid #1b2328; border-radius: 34px; background: #1b2328; overflow: hidden; margin-inline: auto; }
-  .device > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 26px; }
-  .hero--centred .hero__window { background: var(--g-alt); }
-  .hero__window > .hero__art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; z-index: 0; }
-  .hero__window > .hero__phone { position: absolute; z-index: 1; left: 50%; top: var(--s-6); transform: translateX(-50%); --dw: 260px; }
-  @media (max-width: 639px) { .hero__window > .hero__phone { --dw: 180px; top: var(--s-6); } }
-  .hero--centred .hero__lead { color: var(--ink); }
-  html { word-break: keep-all; overflow-wrap: anywhere; }
-  html[lang="ja"] { word-break: normal; line-break: strict; }
-  .close__word { line-height: 1.25; overflow: visible; }
-  #record .frame { --ratio: 0px; }
-  #record .frame .device { position: absolute; left: 50%; top: var(--s-7); transform: translateX(-50%); --dw: 300px; }
-  @media (max-width: 639px) { #record .frame .device { --dw: 220px; top: var(--s-5); } }
-  #nyami .mo-lt__type { font-size: clamp(40px, 4.4vw + 12px, 80px); line-height: 1.05; letter-spacing: var(--display-tracking-xl); max-width: 18ch; margin: 0; }
-  #nyami .shapes { margin-top: var(--s-7); }
-  @media (max-width: 639px) { #nyami .shapes { flex: none; height: auto; aspect-ratio: 1080 / 600; margin-top: var(--s-9); } }
-  #reward .panel { --p-h: 360px; } #room .panel { --p-h: 300px; }
-  @media (min-width: 640px) and (max-width: 1279px) { #reward { --h: 2; } }
-  @media (min-width: 640px) and (max-width: 1023px) { #room .panel { --p-h: 400px; } }
-  .panel .device { --dw: 220px; position: absolute; left: 50%; top: var(--s-6); transform: translateX(-50%); }
-  #room .panel .device { --dw: 240px; }
-  @media (max-width: 639px) { #reward .panel { --p-h: 340px; } #room .panel { --p-h: 150px; } .panel .device { --dw: 200px; top: var(--s-5); } #room .panel .device { --dw: 150px; top: var(--s-4); } }
-  .store-soon { display: inline-flex; align-items: center; height: var(--btn-h, 44px); padding: 0 var(--s-5); border-radius: var(--r-btn); border: 1px dashed color-mix(in oklab, var(--ink) 35%, transparent); color: var(--muted); font-size: 16px; font-weight: 500; cursor: default; user-select: none; }
-  .store-soon.is-prominent { border-style: solid; border-color: var(--ink); color: var(--ink); }
-  .ios-note { margin: 0; color: var(--ink); }
-  @media (max-width: 639px) { .store-soon { width: 100%; justify-content: center; } }
-  .lang-switch { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; min-height: 44px; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&amp;family=Zen+Maru+Gothic:wght@500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css">
 </head>
 <body>
-<!-- type: software (site-kind software): AI meal-logging Android app
-     deal: hero centred, nav nav-centre, close close-word, footer footer-dark, rhythm space, buttons tonal,
-           mark: the client's app icon replaces the dealt ring, ground sage (lit ground), grounds none, effect none
-           (the hero frame holds the client's key art; no shader ground, so phones carry no WebGL)
-     palette: the client's own colours through start.mjs brand: off-white #f7f9fa, slate ink #1f3038 and Nyami's bandana green #5f9a6e
-     moments: liquid-type on the #nyami statement (the one sentence the page turns on), line-carries-colour on #reward (the
-              page's one change of ground, where logging turns into rewards). The hero's cursor-spotlight is left out (no spotlight). -->
-<header class="nav nav--centre">
-  <div class="wrap nav__bar">
-    <a class="skip-link" href="#top" data-i18n="skip">本文へスキップ</a>
-    <a class="nav__logo" href="#top"><img src="../img/app-icon.webp" alt="" width="28" height="28"><span data-i18n="brand">ニャミ</span></a>
-    <nav class="nav__links" aria-label="メインメニュー" data-i18n-aria="nav_label">
-      <div class="nav__item"><a class="nav__link" href="#record" data-i18n="nav_record">記録</a></div>
-      <div class="nav__item"><a class="nav__link" href="#nyami" data-i18n="nav_nyami">ニャミ</a></div>
-      <div class="nav__item"><a class="nav__link" href="#reward" data-i18n="nav_reward">報酬</a></div>
-      <div class="nav__item"><a class="nav__link" href="#room" data-i18n="nav_room">マイルーム</a></div>
-    </nav>
-    <div class="nav__actions">
-      <a class="nav__link" href="../ko/" hreflang="ko" lang="ko">한국어</a>
-      
-      <a class="btn btn--primary" href="https://abr.ge/0p71pql" data-play data-i18n="cta_play">Google Playで入手</a>
-    </div>
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="メニュー" data-i18n-aria="menu">
-      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-    </button>
-  </div>
+<header class="nav">
+  <a class="brand" href="./"><img src="../img/app-icon.webp" width="34" height="34" alt=""><span>Nyummy</span></a>
+  <nav class="lang" aria-label="Language"><a href="../ko/" hreflang="ko" lang="ko">한국어</a><a href="../jp/" hreflang="ja" aria-current="page">日本語</a></nav>
 </header>
 
-<main id="top">
-  <section class="hero hero--centred" data-enter aria-labelledby="hero-h">
-    <div class="wrap"><div class="hero-text">
-      <div class="hero__c">
-        <p class="pill" data-i18n="hero_pill">日本と韓国でAndroid版を配信中</p>
-        <h1 id="hero-h" data-i18n="hero_h1">グラムで計らないAI食事記録アプリ</h1>
-        <p class="hero__lead" data-i18n="hero_lead">食事の写真を1枚撮るとAIが料理を見つけてカロリーとPFCを記録します。月間カレンダーで自分の食習慣を確認でき、食べ方に応じて猫のニャミの体も変わります。</p>
-        <div class="btn-row" data-hero-actions>
-          
-          <a class="btn btn--primary" href="https://abr.ge/0p71pql" data-play data-i18n="cta_play">Google Playで入手</a>
-          <span class="store-soon" data-store-soon aria-disabled="true">App Store 近日公開</span>
-        </div>
-        <p class="t-small ios-note" data-ios-note hidden>iPhone版はまだ公開前です</p>
+<section class="hero" aria-labelledby="hero-h">
+  <div class="hero__art">
+    <picture>
+      <source media="(min-aspect-ratio: 4/5) and (min-width: 1300px)" srcset="../img/hero-wide-1672.webp" type="image/webp">
+      <source media="(min-aspect-ratio: 4/5)" srcset="../img/hero-wide-1200.webp" type="image/webp">
+      <img src="../img/hero-tall.webp" width="828" height="1471" alt="雪の降る村で、緑のバンダナを巻いた猫のニャミと仲間の猫たちが手をふって迎えるイラスト" fetchpriority="high">
+    </picture>
+  </div>
+  <canvas class="snow" aria-hidden="true"></canvas>
+  <div class="hero__copy">
+    <h1 id="hero-h">飼い主さん、<br>今日のごはんは？</h1>
+    <p class="hero__sub">食事の写真1枚で、<br>AIがカロリーとPFCを記録してくれます</p>
+    <div class="actions">
+        <a class="pill" href="https://abr.ge/0p71pql" data-play><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.3-9.7-9.3-9.7Zm10.6 8.4 2.6-2.7L6.3 1.5c-.4-.2-.8-.3-1.1-.2l10 9.4Zm0 2.6-10 9.4c.3.1.7 0 1.1-.2l11.5-6.5-2.6-2.7Zm3.9-4.5-3 2.8 3 2.9 3.3-1.9c1-.6 1-1.6 0-2.1l-3.3-1.7Z"/></svg>Google Playで手に入れよう</a>
+        <span class="pill pill--soon" data-store-soon aria-disabled="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.3.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.8-1.1-2.8-4.2ZM13.9 5.1c.7-.9 1.2-2 1-3.2-1 0-2.2.7-3 1.5-.6.7-1.2 1.9-1 3.1 1.1.1 2.3-.6 3-1.4Z"/></svg>App Store 近日公開</span>
       </div>
-      <!-- CLIENT FILE key art: raw/hero_v1.png (the client's dusk cat village), served as ../img/keyart-*.webp -->
-      <div class="hero__window">
-        <img class="hero__art" src="../img/keyart-1672.webp" srcset="../img/keyart-800.webp 800w, ../img/keyart-1672.webp 1672w" sizes="(max-width: 639px) 170vw, 1280px" width="1672" height="941" alt="夕焼けの猫の街で、ニャミと猫たちが飼い主を出迎えているイラストです。" data-i18n-alt="alt_keyart" fetchpriority="high" data-source="client" data-subject="key art">
-        <div class="device hero__phone" role="img" aria-label="食事記録の画面で、ビビンバの写真を撮影しているところです。" data-i18n-aria="alt_meal"><img src="../img/meal_confirm.webp" srcset="../img/meal_confirm-300.webp 300w, ../img/meal_confirm.webp 560w" sizes="(max-width: 639px) 200px, 300px" width="560" height="1245" alt="" fetchpriority="high"></div>
-      </div>
-    </div></div>
-  </section>
+      <p class="ios-note" data-ios-note hidden>iPhoneをお使いの方も少しだけお待ちくださいね。App Storeでの配信も準備中です。</p>
+  </div>
+  <a class="scroll-hint" href="#features" aria-label="下へ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+</section>
 
-  <section class="section" id="record" style="--hm: 2" aria-labelledby="record-h">
-    <div class="wrap">
-      <div class="grid fill">
-        <div class="span-5 split-col">
-          <h2 id="record-h"><span data-i18n="record_h2">写真1枚でカロリーとPFCを記録します。</span> <span class="muted" data-i18n="record_h2_muted">記録した食事は月間カレンダーに並びます。</span></h2>
-          <p class="t-lead" data-i18n="record_p">料理の写真を撮るとAIが食べ物を見つけてカロリーとPFCを記録します。残した食事は月間カレンダーで1か月まとめて見返せます。</p>
-          <ul class="rows split-col__end">
-            <li><span class="rows__name" data-i18n="record_fact1">写真1枚で料理を認識します</span></li>
-            <li><span class="rows__name" data-i18n="record_fact2">カロリーとPFCをまとめて記録します</span></li>
-            <li><span class="rows__name" data-i18n="record_fact3">月間カレンダーで記録を振り返ります</span></li>
-          </ul>
-        </div>
-        <div class="frame frame--fill frame--lit span-6 start-7">
-          <div class="device" role="img" aria-label="月間カレンダーと1日のカロリー、炭水化物、たんぱく質、脂質が表示された記録画面です。" data-i18n-aria="alt_calendar"><img src="../img/history_calendar.webp" srcset="../img/history_calendar-300.webp 300w, ../img/history_calendar.webp 560w" sizes="(max-width: 639px) 200px, 300px" width="560" height="1245" alt="" loading="lazy" decoding="async"></div>
-        </div>
+<main>
+  <ul class="features" id="features">
+    <li class="feature reveal">
+      <div class="feature__art">
+        <img src="../img/scene-jp-b2.webp" width="800" height="750" alt="コンビニごはんの横でアプリを開いたスマホとニャミのイラスト" loading="lazy" decoding="async">
+        <div class="feature__shot"><img src="../img/meal_confirm-300.webp" width="300" height="650" alt="ニャミのアプリで見つかった料理を選ぶ画面" loading="lazy" decoding="async"></div>
       </div>
+      <div class="feature__text">
+        <span class="tag">写真1枚</span>
+        <h2>撮るだけでAIが記録</h2>
+        <p>ごはんの写真を1枚撮るだけで、AIがカロリーとPFCバランスを自動で記録。</p>
+      </div>
+    </li>
+    <li class="feature reveal">
+      <div class="feature__art">
+        <img src="../img/scene-jp-a1.webp" width="800" height="750" alt="ほっそり、ちょうどいい、ふっくらの3匹のニャミが並ぶイラスト" loading="lazy" decoding="async">
+      </div>
+      <div class="feature__text">
+        <span class="tag">ニャミの姿</span>
+        <h2>食べ方で変わるニャミ</h2>
+        <p>抜くとほっそり、食べすぎるとふっくら。ちょうどよく食べるとぴったりの姿に。</p>
+      </div>
+    </li>
+    <li class="feature reveal">
+      <div class="feature__art">
+        <img src="../img/scene-jp-b1.webp" width="800" height="750" alt="お弁当を撮るスマホとプレゼントの入ったポストのそばのニャミ" loading="lazy" decoding="async">
+      </div>
+      <div class="feature__text">
+        <span class="tag">ごほうび</span>
+        <h2>もぐもぐ演出とお部屋作り</h2>
+        <p>ごはんを記録するともぐもぐシーンが見られて、お部屋を飾るごほうびが届くよ。</p>
+      </div>
+    </li>
+    <li class="feature reveal">
+      <div class="feature__art">
+        <img src="../img/scene-jp-c1.webp" width="800" height="750" alt="スマホのホーム画面ウィジェットの中のニャミと、そのそばのニャミ" loading="lazy" decoding="async">
+      </div>
+      <div class="feature__text">
+        <span class="tag">ウィジェット</span>
+        <h2>ホーム画面で待つニャミ</h2>
+        <p>スマホを開くたび、ホーム画面のウィジェットでニャミがちょこんと待ってるよ。</p>
+      </div>
+    </li>
+  </ul>
+
+  <section class="closing" aria-labelledby="close-h">
+    <div class="closing__art">
+      <picture>
+      <source media="(min-aspect-ratio: 4/5) and (min-width: 1300px)" srcset="../img/hero-wide-1672.webp" type="image/webp">
+      <source media="(min-aspect-ratio: 4/5)" srcset="../img/hero-wide-1200.webp" type="image/webp">
+      <img src="../img/hero-tall.webp" width="828" height="1471" alt="" loading="lazy" decoding="async">
+    </picture>
+    </div>
+    <div class="closing__inner">
+      <h2 id="close-h">今日の一食から、<br>ニャミと一緒にやさしく始めてみませんか？</h2>
+      <div class="actions">
+        <a class="pill" href="https://abr.ge/0p71pql" data-play><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.3-9.7-9.3-9.7Zm10.6 8.4 2.6-2.7L6.3 1.5c-.4-.2-.8-.3-1.1-.2l10 9.4Zm0 2.6-10 9.4c.3.1.7 0 1.1-.2l11.5-6.5-2.6-2.7Zm3.9-4.5-3 2.8 3 2.9 3.3-1.9c1-.6 1-1.6 0-2.1l-3.3-1.7Z"/></svg>Google Playで手に入れよう</a>
+        <span class="pill pill--soon" data-store-soon aria-disabled="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.3.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.8-1.1-2.8-4.2ZM13.9 5.1c.7-.9 1.2-2 1-3.2-1 0-2.2.7-3 1.5-.6.7-1.2 1.9-1 3.1 1.1.1 2.3-.6 3-1.4Z"/></svg>App Store 近日公開</span>
+      </div>
+      <p class="ios-note" data-ios-note hidden>iPhoneをお使いの方も少しだけお待ちくださいね。App Storeでの配信も準備中です。</p>
     </div>
   </section>
+</main>
 
-  <section class="section" id="nyami" aria-labelledby="nyami-h">
-    <div class="wrap">
-      <div data-moment="liquid-type" class="section-head" style="max-width:none">
-        <h2 id="nyami-h" class="mo-lt__type" data-i18n="nyami_h2">食べ方に合わせてニャミの体が変わります</h2>
-        <p class="t-lead" data-i18n="nyami_p">食事を抜くとニャミはほっそりして、食べすぎるとぽっちゃりします。ほどよく食べるとちょうどいい姿になります。</p>
-      </div>
-      <figure class="frame frame--photo shapes fill">
-        <img class="frame__img" src="../img/body-shapes.webp" srcset="../img/body-shapes-640.webp 640w, ../img/body-shapes.webp 1080w" sizes="(max-width: 639px) 342px, 1280px" width="1080" height="500" alt="ほっそりしたニャミ、ちょうどいいニャミ、ぽっちゃりしたニャミが並んで座っているイラストです。" data-i18n-alt="alt_shapes" loading="lazy" decoding="async" data-source="client" data-subject="Nyami body shapes">
-      </figure>
-    </div>
-  </section>
-
-  <section class="section ground-surface" id="reward" style="--hm: 2" data-moment="line-carries-colour" data-moment-opts='{"from": "base"}' aria-labelledby="reward-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="reward-h"><span data-i18n="reward_h2">記録でもぐもぐシーンとごほうびの箱が受信箱に届きます。</span> <span class="muted" data-i18n="reward_h2_muted">コインは食事を記録したときだけ手に入ります。</span></h2>
-      </div>
-      <div class="grid">
-        <article class="card card--row card--open span-4">
-          <h3 data-i18n="reward_c1_t">ニャミのもぐもぐシーンを見ます</h3>
-          <p data-i18n="reward_c1_b">食事を記録すると、ニャミがごはんを食べる短いもぐもぐシーンが流れます。</p>
-          <div class="panel"><div class="device" role="img" aria-label="ニャミがビビンバを食べているマンガのカットシーンです。" data-i18n-aria="alt_comic"><img src="../img/ceremony_comic.webp" srcset="../img/ceremony_comic-300.webp 300w, ../img/ceremony_comic.webp 560w" sizes="(max-width: 639px) 200px, 300px" width="560" height="1245" alt="" loading="lazy" decoding="async"></div></div>
-        </article>
-        <article class="card card--row card--open span-4">
-          <h3 data-i18n="reward_c2_t">受信箱でごほうびの箱を受け取ります</h3>
-          <p data-i18n="reward_c2_b">食事を記録すると、受信箱にごほうびの箱が届きます。</p>
-          <div class="panel"><div class="device" role="img" aria-label="ゴールドの箱とシルバーの箱が積み重なった受信箱の画面です。" data-i18n-aria="alt_mail"><img src="../img/mailbox.webp" srcset="../img/mailbox-300.webp 300w, ../img/mailbox.webp 560w" sizes="(max-width: 639px) 200px, 300px" width="560" height="1245" alt="" loading="lazy" decoding="async"></div></div>
-        </article>
-        <article class="card card--row card--open span-4">
-          <h3 data-i18n="reward_c3_t">コインで家具と部屋の背景を買います</h3>
-          <p data-i18n="reward_c3_b">貯めたコインで、ショップから家具や部屋の背景を買えます。</p>
-          <div class="panel"><div class="device" role="img" aria-label="コインの残高と人気の家具が並んでいるショップの画面です。" data-i18n-aria="alt_shop"><img src="../img/shop_recommend.webp" srcset="../img/shop_recommend-300.webp 300w, ../img/shop_recommend.webp 560w" sizes="(max-width: 639px) 200px, 300px" width="560" height="1245" alt="" loading="lazy" decoding="async"></div></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="room" aria-labelledby="room-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="room-h"><span data-i18n="room_h2">ショップの家具でマイルームを飾ります。</span> <span class="muted" data-i18n="room_h2_muted">ホーム画面のウィジェットでニャミが待っています。</span></h2>
-      </div>
-      <div class="grid">
-        <article class="card card--row card--open span-6">
-          <h3 data-i18n="room_c1_t">家具と背景でマイルームを飾ります</h3>
-          <p data-i18n="room_c1_b">ショップの家具や部屋の背景を選んで、ニャミの部屋を自分の好きなように模様替えできます。</p>
-          <div class="panel"><div class="device" role="img" aria-label="家具を配置するマイルームの編集画面です。" data-i18n-aria="alt_room"><img src="../img/myroom_edit.webp" srcset="../img/myroom_edit-300.webp 300w, ../img/myroom_edit.webp 560w" sizes="(max-width: 639px) 200px, 300px" width="560" height="1245" alt="" loading="lazy" decoding="async"></div></div>
-        </article>
-        <article class="card card--row card--open span-6">
-          <h3 data-i18n="room_c2_t">ウィジェットでニャミの姿を見ます</h3>
-          <p data-i18n="room_c2_b">ホーム画面のウィジェットでは、食事の時間になるたびにニャミが飼い主を待っています。</p>
-          <div class="panel"><div class="device" role="img" aria-label="昼ごはんを待つニャミが描かれたホーム画面のウィジェットです。" data-i18n-aria="alt_widget"><img src="../img/widget_wait.webp" srcset="../img/widget_wait-300.webp 300w, ../img/widget_wait.webp 560w" sizes="(max-width: 639px) 200px, 300px" width="560" height="1245" alt="" loading="lazy" decoding="async"></div></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  </main>
-
-<footer class="footer closing footer--dark ground-inverse g2m" id="contact" aria-labelledby="close-h">
-  <div class="wrap">
-    <div class="closing__cta close--word">
-      <div class="section-head--split">
-        <div><h2 id="close-h" data-i18n="close_h2">写真1枚から食事記録を始めます</h2><p class="t-lead" data-i18n="close_p">現在はAndroid版のみ利用できます。</p></div>
-        
-        <a class="btn btn--primary" href="https://abr.ge/0p71pql" data-play data-i18n="cta_play">Google Playで入手</a>
-      </div>
-      <p class="close__word" aria-hidden="true" data-i18n="brand">ニャミ</p>
-    </div>
-    <div class="closing__links">
-      <div class="grid">
-        <div class="span-4 stack-4">
-          <a class="nav__logo" href="#top"><img src="../img/app-icon.webp" alt="" width="28" height="28" loading="lazy"><span data-i18n="brand">ニャミ</span></a>
-          <p class="footer__lede" data-i18n="footer_lede">AI食事記録アプリNyummyを開発しています。</p>
-        </div>
-        <div class="span-2 start-7 footer__col"><h3 data-i18n="f_app">アプリ</h3><ul><li><a href="#record" data-i18n="nav_record">記録</a></li><li><a href="#nyami" data-i18n="nav_nyami">ニャミ</a></li></ul></div>
-        <div class="span-2 start-9 footer__col"><h3 data-i18n="nav_reward">報酬</h3><ul><li><a href="#reward" data-i18n="nav_reward">報酬</a></li><li><a href="#room" data-i18n="nav_room">マイルーム</a></li></ul></div>
-        <div class="span-2 start-11 footer__col"><h3 data-i18n="f_legal">規約</h3><ul><li><a href="./policy/privacy.html" data-i18n="f_privacy">プライバシーポリシー</a></li><li><a href="./policy/terms.html" data-i18n="f_terms">利用規約</a></li></ul></div>
-      </div>
-      <div class="footer__legal">
-        <span>&copy; 2026 <span data-i18n="brand">ニャミ</span></span>
-        <div class="socials"></div>
-      </div>
-    </div>
+<footer class="footer">
+  <div class="footer__in">
+    <nav aria-label="Legal"><a href="./policy/privacy.html">プライバシーポリシー</a><a href="./policy/terms.html">利用規約</a></nav>
+    <p>© Dandi</p>
   </div>
 </footer>
-
-<script type="module" src="../assets/system.js"></script>
-<script type="module" src="../assets/motion/motion.js"></script>
-<script type="module" src="../assets/layout/layout.js"></script>
-<script src="../page.js" defer></script>
+<script src="../site.js" defer></script>
 </body>
 </html>
