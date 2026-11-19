@@ -18,10 +18,10 @@
 <!-- <link rel="canonical" href="https://[the client's domain]/"> : the landing domain is not decided yet -->
 <meta name="site-kind" content="software">
 <meta name="page-type" content="software">
-<!-- Airbridge Web SDK (official loader). TODO: replace TODO_WEB_TOKEN with the web token from the Airbridge dashboard. -->
+<!-- Airbridge Web SDK (official loader). TODO: replace e3690b146ca047b89c410e6a1fdf38f9 with the web token from the Airbridge dashboard. -->
 <script>
 (function(a_,i_,r_,_b,_r,_i,_d,_g,_e){if(!a_[_b]){var n=function(){var c=i_.createElement(r_);c.onerror=function(){h.queue.filter(function(a){return 0<=_d.indexOf(a[0])}).forEach(function(a){a=a[1];a=a[a.length-1];"function"===typeof a&&a("error occur when load airbridge")})};c.async=1;c.src=_r;"complete"===i_.readyState?i_.head.appendChild(c):a_.addEventListener("load",function k(){a_.removeEventListener("load",k);i_.head.appendChild(c)})},h={queue:[],get isSDKEnabled(){return!1}};_i.concat(_d).forEach(function(c){var a=c.split("."),k=a.pop();a.reduce(function(p,q){return p[q]=p[q]||{}},h)[k]=function(){h.queue.push([c,arguments])}});a_[_b]=h;0<_g?(_b=new (a_.XDomainRequest||a_.XMLHttpRequest),_i=function(){},_b.open("GET",_r),_b.timeout=_g,_b.onload=function(){n()},_b.onerror=_i,_b.ontimeout=_i,_b.send()):n()}})(window,document,"script","airbridge","//static.airbridge.io/sdk/latest/airbridge.min.js","init startTracking stopTracking openDeeplink setDeeplinks sendWeb setUserAgent setUserAlias addUserAlias setMobileAppData setUserId setUserEmail setUserPhone setUserAttributes clearUser setDeviceAlias removeDeviceAlias clearDeviceAlias setDeviceIFV setDeviceIFA setDeviceGAID events.send events.signIn events.signUp events.signOut events.purchased events.addedToCart events.productDetailsViewEvent events.homeViewEvent events.productListViewEvent events.searchResultViewEvent".split(" "),["events.wait","createTouchpoint"],0);
-try { airbridge.init({ app: 'nyummy', webToken: 'TODO_WEB_TOKEN' }); } catch (e) {}
+try { airbridge.init({ app: 'nyummy', webToken: 'e3690b146ca047b89c410e6a1fdf38f9' }); } catch (e) {}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,8 +109,8 @@ html[lang="ja"] { --font-display: "IBM Plex Sans JP", system-ui, sans-serif; --f
     </nav>
     <div class="nav__actions">
       <a class="nav__link" href="../jp/" hreflang="ja" lang="ja">日本語</a>
-      <!-- TODO: Airbridge tracking link -->
-      <a class="btn btn--primary" href="https://play.google.com/store/apps/details?id=com.dandi.nyummy" data-play data-i18n="cta_play">Google Play에서 받기</a>
+      
+      <a class="btn btn--primary" href="https://abr.ge/ltml84v" data-play data-i18n="cta_play">Google Play에서 받기</a>
     </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-label="메뉴" data-i18n-aria="menu">
       <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -126,8 +126,8 @@ html[lang="ja"] { --font-display: "IBM Plex Sans JP", system-ui, sans-serif; --f
         <h1 id="hero-h" data-i18n="hero_h1">그램을 세지 않는 AI 식단 기록 앱</h1>
         <p class="hero__lead" data-i18n="hero_lead">식사 사진 한 장을 찍으면 AI가 음식을 찾아 칼로리와 탄단지를 기록해요. 월간 캘린더에서 내 식습관을 볼 수 있고, 먹는 방식에 따라 고양이 냐미의 몸도 바뀌어요.</p>
         <div class="btn-row" data-hero-actions>
-          <!-- TODO: Airbridge tracking link -->
-          <a class="btn btn--primary" href="https://play.google.com/store/apps/details?id=com.dandi.nyummy" data-play data-i18n="cta_play">Google Play에서 받기</a>
+          
+          <a class="btn btn--primary" href="https://abr.ge/ltml84v" data-play data-i18n="cta_play">Google Play에서 받기</a>
           <span class="store-soon" data-store-soon aria-disabled="true">App Store 준비 중</span>
         </div>
         <p class="t-small ios-note" data-ios-note hidden>iPhone 앱은 아직 출시 전이에요</p>
@@ -223,8 +223,8 @@ html[lang="ja"] { --font-display: "IBM Plex Sans JP", system-ui, sans-serif; --f
     <div class="closing__cta close--word">
       <div class="section-head--split">
         <div><h2 id="close-h" data-i18n="close_h2">사진 한 장으로 식습관을 챙겨요</h2><p class="t-lead" data-i18n="close_p">지금은 Android 버전만 출시됐어요.</p></div>
-        <!-- TODO: Airbridge tracking link -->
-        <a class="btn btn--primary" href="https://play.google.com/store/apps/details?id=com.dandi.nyummy" data-play data-i18n="cta_play">Google Play에서 받기</a>
+        
+        <a class="btn btn--primary" href="https://abr.ge/ltml84v" data-play data-i18n="cta_play">Google Play에서 받기</a>
       </div>
       <p class="close__word" aria-hidden="true" data-i18n="brand">냐미</p>
     </div>
