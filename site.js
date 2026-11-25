@@ -14,7 +14,12 @@
 
   /* ---------- iPhone / iPad: App Store pill first (no redirect; Android keeps Play first) */
   var ua = navigator.userAgent || '';
-  if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) {
+  var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  /* phones use the Airbridge link (it picks the right store); desktop keeps the direct App Store href */
+  if (isIOS || /Android/i.test(ua)) {
+    doc.querySelectorAll('[data-mobile-href]').forEach(function (a) { a.href = a.getAttribute('data-mobile-href'); });
+  }
+  if (isIOS) {
     doc.querySelectorAll('[data-appstore]').forEach(function (s) { s.parentNode.insertBefore(s, s.parentNode.firstChild); });
   }
 
