@@ -1,4 +1,4 @@
-/* Nyummy landing (ko/ and jp/): falling snow, iPhone store order, Airbridge click event, gentle reveal.
+/* Nyummy landing (ko/ and jp/): falling snow, store order by device, Airbridge click event, gentle reveal.
    Every part is guarded: the page reads fully with this file missing or failing. */
 (function () {
   'use strict';
@@ -6,16 +6,16 @@
 
   /* ---------- Airbridge: never let the SDK break a click */
   doc.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[data-play]');
+    var a = e.target.closest && e.target.closest('a[data-play], a[data-appstore]');
     if (!a) return;
-    try { if (window.airbridge && window.airbridge.events && typeof window.airbridge.events.send === 'function') window.airbridge.events.send('landing_play_click'); } catch (err) {}
+    var name = a.hasAttribute('data-appstore') ? 'landing_appstore_click' : 'landing_play_click';
+    try { if (window.airbridge && window.airbridge.events && typeof window.airbridge.events.send === 'function') window.airbridge.events.send(name); } catch (err) {}
   });
 
-  /* ---------- iPhone / iPad: App Store pill first, with the soft note */
+  /* ---------- iPhone / iPad: App Store pill first (no redirect; Android keeps Play first) */
   var ua = navigator.userAgent || '';
   if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) {
-    doc.querySelectorAll('[data-store-soon]').forEach(function (s) { s.parentNode.insertBefore(s, s.parentNode.firstChild); });
-    doc.querySelectorAll('[data-ios-note]').forEach(function (n) { n.hidden = false; });
+    doc.querySelectorAll('[data-appstore]').forEach(function (s) { s.parentNode.insertBefore(s, s.parentNode.firstChild); });
   }
 
   /* ---------- gentle reveal (content is visible without JS; .js is only added here) */
