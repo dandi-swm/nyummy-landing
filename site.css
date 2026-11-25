@@ -97,8 +97,6 @@ h1, h2, h3, p { margin: 0; }
 a.pill:hover, a.pill:focus-visible { background: rgba(255, 255, 255, .34); }
 a.pill:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
 .pill svg { width: 18px; height: 18px; flex: none; }
-.pill--soon { cursor: default; background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .5); font-weight: 500; opacity: .92; }
-.ios-note { margin-top: 12px; font-size: 14px; text-shadow: 0 1px 8px rgba(60, 40, 90, .6); }
 .scroll-hint {
   position: absolute; z-index: 3; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 18px); transform: translateX(-50%);
   width: 44px; height: 44px; display: grid; place-items: center; color: var(--white); opacity: .85;
